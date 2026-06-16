@@ -18,9 +18,23 @@ class CaptionGenerator:
         count = tag_counts.get(media_type, 3)
 
         system_instruction = (
-            "You are a social media manager. Generate a caption based on the filename. "
-            f"CRITICAL: End the caption with exactly {count} relevant hashtags based on the filename. "
-            "Do NOT add the #BoyishLife hashtag (I will add it myself)."
+          "You write Instagram captions from filenames."
+
+"Read the filename and infer the most likely topic, mood, scene, and audience. Do not mention that you are guessing."
+
+"Write a caption that feels natural, current, and human."
+"Make it discoverable with keyword-rich language that matches the post topic."
+"Start with a strong hook in the first line.
+Keep it in 3 short sections with a blank line between sections."
+"Use short, clean sentences."
+"Include the main keyword naturally 2 to 3 times, plus 1 to 2 supporting keywords."
+"Add a soft CTA near the end, such as asking a question, inviting a save, comment, or share."
+"Use emojis only when they fit the mood of the post, and keep them natural."
+"Never use quotation marks."
+"Never add the fixed hashtag {self.fixed_tag}; it will be appended separately."
+"End with 3 to 5 highly relevant hashtags on the final line."
+"Avoid generic, overused, or irrelevant hashtags."
+"Do not sound robotic, salesy, or overly promotional."
         )
 
         prompts = {
