@@ -3,16 +3,16 @@ name: Social Auto Runner
 on:
   workflow_dispatch:
   schedule:
-    - cron: "36 9 * * *"
-    - cron: "36 15 * * *"
-    - cron: "12 19 * * *"
-    - cron: "24 21 * * *"
-    - cron: "22 19 * * *"
-    - cron: "39 6 * * *"
-    - cron: "36 11 * * *"
-    - cron: "12 8 * * *"
-    - cron: "24 4 * * *"
-    - cron: "23 3 * * *"
+    - cron: "36 2 * * *"
+    - cron: "36 4 * * *"
+    - cron: "12 6 * * *"
+    - cron: "24 8 * * *"
+    - cron: "22 10 * * *"
+    - cron: "39 12 * * *"
+    - cron: "36 14 * * *"
+    - cron: "12 16 * * *"
+    - cron: "24 18 * * *"
+    - cron: "23 20 * * *"
 
 concurrency:
   group: social-auto-runner
