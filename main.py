@@ -10,7 +10,7 @@ from core.verifier import MediaVerifier
 from modules.dropbox_handler import DropboxHandler
 from modules.caption_generator import CaptionGenerator
 from modules.utils import setup_logging
-from platforms.facebook import FacebookPoster
+#from platforms.facebook import FacebookPoster
 from platforms.telegram import TelegramPoster
 from platforms.discord import DiscordPoster
 from platforms.tumblr import TumblrPoster
