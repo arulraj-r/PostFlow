@@ -194,7 +194,7 @@ def main():
     delay = settings.get("post_delay", 10)
 
     mapping = {
-        "facebook": FacebookPoster,
+        #"facebook": FacebookPoster,
         "telegram": TelegramPoster,
         "discord": DiscordPoster,
         "tumblr": TumblrPoster,
