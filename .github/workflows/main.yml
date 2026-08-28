@@ -3,16 +3,26 @@ name: Social Auto Runner
 on:
   workflow_dispatch:
   schedule:
-    - cron: "36 2 * * *"
-    - cron: "36 4 * * *"
-    - cron: "12 6 * * *"
+    - cron: "0 0 * * *"
+    - cron: "12 1 * * *"
+    - cron: "24 2 * * *"
+    - cron: "36 3 * * *"
+    - cron: "48 4 * * *"
+    - cron: "0 6 * * *"
+    - cron: "12 7 * * *"
     - cron: "24 8 * * *"
-    - cron: "22 10 * * *"
-    - cron: "39 12 * * *"
-    - cron: "36 14 * * *"
-    - cron: "12 16 * * *"
-    - cron: "24 18 * * *"
-    - cron: "23 20 * * *"
+    - cron: "36 9 * * *"
+    - cron: "48 10 * * *"
+    - cron: "0 12 * * *"
+    - cron: "12 13 * * *"
+    - cron: "24 14 * * *"
+    - cron: "36 15 * * *"
+    - cron: "48 16 * * *"
+    - cron: "0 18 * * *"
+    - cron: "12 19 * * *"
+    - cron: "24 20 * * *"
+    - cron: "36 21 * * *"
+    - cron: "48 22 * * *"
 
 concurrency:
   group: social-auto-runner
@@ -45,6 +55,8 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
           META_TOKEN: ${{ secrets.META_TOKEN }}
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
           TELEGRAM_POST_BOT_TOKEN: ${{ secrets.TELEGRAM_POST_BOT_TOKEN }}
           TELEGRAM_POST_CHAT_ID: ${{ secrets.TELEGRAM_POST_CHAT_ID }}
           TELEGRAM_LOG_BOT_TOKEN: ${{ secrets.TELEGRAM_LOG_BOT_TOKEN }}

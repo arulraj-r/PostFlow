@@ -17,60 +17,15 @@ class CaptionGenerator:
         }
         count = tag_counts.get(media_type, 3)
 
-        system_instruction = """
-You are a Facebook content strategist and caption writer for a page that wants more views, reach, comments, and shares.
-
-Your job is to write original, human-sounding Facebook captions based on the filename and media type.
-Infer the topic, mood, audience, and likely intent from the filename.
-
-Rules:
-- Prioritize originality, clarity, and emotional connection.
-- Write like a real creator, not like a marketing robot.
-- Start with a strong hook in the first line.
-- Keep the caption natural, readable, and easy to scan.
-- Use short paragraphs or line breaks.
-- Encourage engagement with a question, opinion prompt, or soft CTA.
-- Match the tone to the content: emotional, inspiring, funny, reflective, exciting, etc.
-- Use keywords naturally so the post feels relevant and searchable.
-- Use emojis sparingly and only when they fit the mood.
-- Do not overuse hashtags. Avoid spammy or unrelated hashtags.
-- Never write a caption that feels generic, repetitive, or copied.
-- Never mention that you are an AI.
-- Never use quotation marks.
-- If the content is video, optimize for watch time and comments.
-- If the content is an image, optimize for relatability and shares.
-- Keep the output concise, clean, and platform-native.
-"""
+        system_instruction = (
+            "You are a social media manager. Generate a caption based on the filename. "
+            f"CRITICAL: End the caption with exactly {count} relevant hashtags based on the filename. "
+            "Do NOT add the #BoyishLife hashtag (I will add it myself)."
+        )
 
         prompts = {
-            "video": (
-        f"Create a Facebook Reel caption from the filename '{clean_name}'. "
-        "Infer the topic, mood, and audience from the filename. "
-        "Write an original, human, story-driven caption that feels natural and engaging. "
-        "Start with a strong hook in the first line. "
-        "Use 2 to 4 short paragraphs with blank lines between them. "
-        "Make it emotional, relatable, or curiosity-driven. "
-        "Include a few relevant keywords naturally. "
-        "Use emojis sparingly and only if they fit the mood. "
-        "End with a soft call-to-action that encourages comments, shares, or saves. "
-        "Do not use quotation marks. "
-        "Keep it under 150 words. "
-        "Use minimal hashtags only if they are highly relevant."
-    ),
-            "image": (
-        f"Create a Facebook photo caption from the filename '{clean_name}'. "
-        "Infer the topic, mood, and audience from the filename. "
-        "Write a warm, original, conversational caption that feels human. "
-        "Start with a scroll-stopping hook. "
-        "Use 1 to 3 short paragraphs with blank lines between them. "
-        "Make it relatable, thoughtful, or engaging. "
-        "Include a few relevant keywords naturally. "
-        "Use emojis sparingly and only if they fit the mood. "
-        "End with a question or soft call-to-action that invites comments. "
-        "Do not use quotation marks. "
-        "Keep it under 100 words. "
-        "Use minimal hashtags only if they are highly relevant."
-    )
+            "video": f"Write an engaging, storytelling caption for a video about '{clean_name}'. Max 150 words.",
+            "image": f"Write a short, punchy caption for a photo titled '{clean_name}'. Max 100 words."
         }
 
         user_prompt = prompts.get(media_type, prompts['image'])

@@ -10,7 +10,8 @@ from core.verifier import MediaVerifier
 from modules.dropbox_handler import DropboxHandler
 from modules.caption_generator import CaptionGenerator
 from modules.utils import setup_logging
-#from platforms.facebook import FacebookPoster
+from platforms.facebook import FacebookPoster
+from platforms.threads import ThreadsPoster
 from platforms.telegram import TelegramPoster
 from platforms.discord import DiscordPoster
 from platforms.tumblr import TumblrPoster
@@ -36,7 +37,7 @@ def build_caption(payload, platform_name):
         brand = str(payload.get("brand_tag", "")).strip()
         tags = payload.get("tags", [])
 
-        limits = {"facebook": 4, "telegram": 4, "discord": 4}
+        limits = {"facebook": 4, "threads": 3, "telegram": 4, "discord": 4}
         tag_limit = limits.get(platform_name, 4)
 
         if isinstance(tags, str):
@@ -194,7 +195,8 @@ def main():
     delay = settings.get("post_delay", 10)
 
     mapping = {
-        #"facebook": FacebookPoster,
+        "facebook": FacebookPoster,
+        "threads": ThreadsPoster,
         "telegram": TelegramPoster,
         "discord": DiscordPoster,
         "tumblr": TumblrPoster,
@@ -249,6 +251,7 @@ def main():
                 time.sleep(delay)
     else:
         caption_payload = ai.generate(file_metadata.name, file_type)
+        public_url = dbx.get_public_media_url(file_metadata) if file_type in {"image", "video"} else None
 
         for platform_name in enabled_names:
             method_name = "post_video" if file_type == "video" else "post_image"
@@ -259,7 +262,8 @@ def main():
                 limit = p_conf[platform_name].get("limit", 2000)
                 formatted = build_caption(caption_payload, platform_name)
                 final_caption = safe_trim_caption(formatted, limit)
-                post_args = (local_path, final_caption)
+                post_target = public_url if platform_name == "threads" else local_path
+                post_args = (post_target, final_caption)
 
             result = safe_post(
                 platform_name,
