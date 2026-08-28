@@ -1,19 +1,28 @@
 {
   "platforms": {
     "facebook": {
-      "limit": 3000
+      "limit": 3000,
+      "enable_text_posts": true
+    },
+    "instagram": {
+      "limit": 2200,
+      "enable_text_posts": false
     },
     "telegram": {
-      "limit": 1024
+      "limit": 1024,
+      "enable_text_posts": true
     },
     "threads": {
-      "limit": 500
+      "limit": 500,
+      "enable_text_posts": true
     },
     "tumblr": {
-      "limit": 2000
+      "limit": 2000,
+      "enable_text_posts": true
     },
     "discord": {
-      "limit": 2000
+      "limit": 2000,
+      "enable_text_posts": true
     }
   },
   "dropbox": {
@@ -26,6 +35,10 @@
     "retry_delay": 20,
     "poll_interval": 20,
     "poll_attempts": 3,
+    "instagram_graph_version": "v18.0",
+    "instagram_processing_wait_seconds": 10,
+    "instagram_processing_max_attempts": 30,
+    "instagram_publish_delay_seconds": 15,
     "fixed_hashtag": "#arul9x",
     "threads_auto_publish_text": true,
     "threads_reply_control": "everyone",

@@ -11,6 +11,7 @@ from modules.dropbox_handler import DropboxHandler
 from modules.caption_generator import CaptionGenerator
 from modules.utils import setup_logging
 from platforms.facebook import FacebookPoster
+from platforms.instagram import InstagramPoster
 from platforms.threads import ThreadsPoster
 from platforms.telegram import TelegramPoster
 from platforms.discord import DiscordPoster
@@ -107,6 +108,10 @@ def safe_post(platform_name, platform_obj, method_name, args, retry_engine,
         return False
 
 
+def is_text_post_enabled(platform_config):
+    return bool(platform_config.get("enable_text_posts", True))
+
+
 def print_final_summary(enabled_platforms, total_platforms, dbx):
     total_success = sum(d["success"] for d in PLATFORM_RESULTS.values())
     total_failed = sum(d["failed"] for d in PLATFORM_RESULTS.values())
@@ -196,6 +201,7 @@ def main():
 
     mapping = {
         "facebook": FacebookPoster,
+        "instagram": InstagramPoster,
         "threads": ThreadsPoster,
         "telegram": TelegramPoster,
         "discord": DiscordPoster,
@@ -237,6 +243,13 @@ def main():
             failed_platforms = enabled_names[:]
         else:
             for platform_name in enabled_names:
+                if not is_text_post_enabled(p_conf.get(platform_name, {})):
+                    PLATFORM_RESULTS[platform_name]["skipped"] += 1
+                    logger.info(
+                        f"{platform_name.upper()} skipped: text posting disabled in config"
+                    )
+                    continue
+
                 limit = p_conf[platform_name].get("limit", 2000)
                 final_text = safe_trim_caption(text_content, limit)
                 result = safe_post(
@@ -262,7 +275,11 @@ def main():
                 limit = p_conf[platform_name].get("limit", 2000)
                 formatted = build_caption(caption_payload, platform_name)
                 final_caption = safe_trim_caption(formatted, limit)
-                post_target = public_url if platform_name == "threads" else local_path
+                post_target = (
+                    public_url
+                    if platform_name in {"threads", "instagram"}
+                    else local_path
+                )
                 post_args = (post_target, final_caption)
 
             result = safe_post(
