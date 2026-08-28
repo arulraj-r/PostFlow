@@ -39,7 +39,7 @@
     "instagram_processing_wait_seconds": 10,
     "instagram_processing_max_attempts": 30,
     "instagram_publish_delay_seconds": 15,
-    "fixed_hashtag": "#arul9x",
+    "fixed_hashtag": "#DeletedNote",
     "threads_auto_publish_text": true,
     "threads_reply_control": "everyone",
     "threads_enable_reply_approvals": false
