@@ -12,7 +12,7 @@ class InstagramPoster:
         self.ig_id = os.getenv("IG_ID")
         self.token = os.getenv("META_TOKEN")
         self.graph_version = str(settings.get("instagram_graph_version", "v18.0")).strip()
-        self.base_url = f"https://graph.instagram.com/{self.graph_version}/{self.ig_id}"
+        self.base_url = f"https://graph.facebook.com/{self.graph_version}/{self.ig_id}"
         self.processing_wait_seconds = int(
             settings.get("instagram_processing_wait_seconds", 10)
         )
@@ -87,7 +87,7 @@ class InstagramPoster:
 
         for attempt in range(1, self.processing_max_attempts + 1):
             status_response = requests.get(
-                f"https://graph.instagram.com/{self.graph_version}/{creation_id}",
+                f"https://graph.facebook.com/{self.graph_version}/{creation_id}",
                 params={"fields": "status_code", "access_token": self.token},
                 timeout=30,
             )
