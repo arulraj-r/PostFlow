@@ -14,13 +14,13 @@ class InstagramPoster:
         self.graph_version = str(settings.get("instagram_graph_version", "v18.0")).strip()
         self.base_url = f"https://graph.facebook.com/{self.graph_version}/{self.ig_id}"
         self.processing_wait_seconds = int(
-            settings.get("instagram_processing_wait_seconds", 10)
+            settings.get("instagram_processing_wait_seconds", 30)
         )
         self.processing_max_attempts = int(
             settings.get("instagram_processing_max_attempts", 30)
         )
         self.publish_delay_seconds = int(
-            settings.get("instagram_publish_delay_seconds", 15)
+            settings.get("instagram_publish_delay_seconds", 20)
         )
 
         if not self.ig_id or not self.token:
