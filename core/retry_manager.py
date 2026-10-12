@@ -6,7 +6,7 @@ from .error_classifier import ErrorClassifier
 
 
 class SmartRetry:
-    def __init__(self, max_attempts=5, retry_delay=20, max_backoff=900):
+    def __init__(self, max_attempts=5, retry_delay=40, max_backoff=900):
         self.max_attempts = max_attempts
         self.retry_delay = retry_delay
         self.max_backoff = max_backoff
