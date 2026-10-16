@@ -10,8 +10,8 @@ from core.verifier import MediaVerifier
 from modules.dropbox_handler import DropboxHandler
 from modules.caption_generator import CaptionGenerator
 from modules.utils import setup_logging
-#from platforms.facebook import FacebookPoster
-#from platforms.instagram import InstagramPoster
+from platforms.facebook import FacebookPoster
+from platforms.instagram import InstagramPoster
 from platforms.threads import ThreadsPoster
 from platforms.telegram import TelegramPoster
 from platforms.discord import DiscordPoster
@@ -200,8 +200,8 @@ def main():
     delay = settings.get("post_delay", 10)
 
     mapping = {
-        #"facebook": FacebookPoster,
-        #"instagram": InstagramPoster,
+        "facebook": FacebookPoster,
+        "instagram": InstagramPoster,
         "threads": ThreadsPoster,
         "telegram": TelegramPoster,
         "discord": DiscordPoster,
